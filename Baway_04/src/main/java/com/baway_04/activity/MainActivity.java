@@ -1,12 +1,17 @@
 package com.baway_04.activity;
 
+import android.content.Intent;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.baway_04.R;
 import com.baway_04.Urls;
 import com.baway_04.adapter.XutilAdapter;
+import com.baway_04.map.MapbdActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,9 +28,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     @ViewInject(R.id.listview)
-    ListView listView;
-    List<String> itemList = new ArrayList<>();
-    XutilAdapter adapter;
+    private ListView listView;
+    private List<String> itemList = new ArrayList<>();
+    private XutilAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
         adapter = new XutilAdapter(this);
         adapter.setList(itemList);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(MainActivity.this, MapbdActivity.class));
+            }
+        });
     }
 
     public void initXutilsQuest(){
@@ -49,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
 
-                LogUtil.e(result);
+                LogUtil.e(result+"-is-mainThread="+(Looper.getMainLooper()==Looper.myLooper()));
 
                 try {
                     JSONObject jsonObject = new JSONObject(result);
