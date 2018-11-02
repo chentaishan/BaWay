@@ -1,4 +1,4 @@
-package com.baway_04.bdmap;
+package com.baway_04.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,7 +33,7 @@ import butterknife.ButterKnife;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class MapbdActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
+public class BdMapbdActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
     @BindView(R.id.bd_mapview)
     MapView mapView;
@@ -122,7 +122,7 @@ public class MapbdActivity extends AppCompatActivity implements EasyPermissions.
 
             Log.e(TAG, "onReceiveLocation: " + location.getAddrStr());
 
-            Toast.makeText(MapbdActivity.this, "", Toast.LENGTH_SHORT).show();
+            Toast.makeText(BdMapbdActivity.this, "", Toast.LENGTH_SHORT).show();
             setMarkerPosition(location.getLatitude(), location.getLongitude());
 
             if (location == null) {
@@ -232,7 +232,7 @@ public class MapbdActivity extends AppCompatActivity implements EasyPermissions.
         mapView.getMap().setOnMarkerClickListener(new BaiduMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Toast.makeText(MapbdActivity.this, "marker" + marker.getPosition().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(BdMapbdActivity.this, "marker" + marker.getPosition().toString(), Toast.LENGTH_SHORT).show();
                 return false;
             }
         });

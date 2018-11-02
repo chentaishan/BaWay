@@ -9,8 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.baway_04.R;
-import com.baway_04.bdmap.MapbdActivity;
-import com.baway_04.gaodemap.GaodeMapActivity;
+import com.baway_04.activity.BdMapbdActivity;
+import com.baway_04.activity.GaodeMapActivity;
 import com.baway_04.utils.Urls;
 import com.baway_04.adapter.XutilAdapter;
 
@@ -41,17 +41,22 @@ public class MainActivity extends AppCompatActivity {
         x.view().inject(this);
 
         initView();
-        initXutilsQuest();
+//        initXutilsQuest();
     }
 
     public void initView(){
         adapter = new XutilAdapter(this);
-        adapter.setList(itemList);
+//        adapter.setList(itemList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(MainActivity.this, GaodeMapActivity.class));
+                String className =   adapter.getKey(i);
+                Intent intent = new Intent();
+                String packageName = "com.baway_04.";
+                intent.setClassName(packageName+"MainActivity",packageName+className);
+                startActivity(intent);
+
             }
         });
     }
@@ -74,8 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         itemList.add(object.optString("pic"));
                     }
 
-                    adapter.setList(itemList);
-                    adapter.notifyDataSetChanged();
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
