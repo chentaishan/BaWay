@@ -9,9 +9,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.baway_04.R;
-import com.baway_04.Urls;
+import com.baway_04.bdmap.MapbdActivity;
+import com.baway_04.gaodemap.GaodeMapActivity;
+import com.baway_04.utils.Urls;
 import com.baway_04.adapter.XutilAdapter;
-import com.baway_04.map.MapbdActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     @ViewInject(R.id.listview)
     private ListView listView;
+
     private List<String> itemList = new ArrayList<>();
     private XutilAdapter adapter;
     @Override
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(MainActivity.this, MapbdActivity.class));
+                startActivity(new Intent(MainActivity.this, GaodeMapActivity.class));
             }
         });
     }
