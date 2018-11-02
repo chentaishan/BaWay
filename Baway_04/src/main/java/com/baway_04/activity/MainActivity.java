@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String className =   adapter.getKey(i);
                 Intent intent = new Intent();
-                String packageName = "com.baway_04.";
-                intent.setClassName(packageName+"MainActivity",packageName+className);
+                String packageName = "com.baway_04.activity.";
+                intent.setClassName(MainActivity.this,packageName+className);
                 startActivity(intent);
 
             }
