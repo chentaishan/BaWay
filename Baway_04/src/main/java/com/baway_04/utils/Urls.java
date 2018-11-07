@@ -16,5 +16,9 @@ public class Urls {
         className = new HashMap<>();
         className.put("GaodeMapActivity","实现定位和marker标记");
         classList.add(className);
+
+        className = new HashMap<>();
+        className.put("IntentServiceActivity","测试intentService");
+        classList.add(className);
     }
 }

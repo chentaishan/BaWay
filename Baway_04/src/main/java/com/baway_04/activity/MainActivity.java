@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         x.view().inject(this);
 
+
+
         initView();
 //        initXutilsQuest();
     }
@@ -78,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
                         itemList.add(object.optString("pic"));
                     }
-
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
