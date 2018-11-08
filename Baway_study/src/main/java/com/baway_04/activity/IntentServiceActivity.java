@@ -53,6 +53,7 @@ public class IntentServiceActivity extends AppCompatActivity implements IUpdateL
 
             RecylerAdapter adapter = new RecylerAdapter(IntentServiceActivity.this,foodList);
             recyclerView.setLayoutManager(new LinearLayoutManager(IntentServiceActivity.this));//这里用线性显示 类似于listview
+//            recyclerView.setLayoutManager(new LinearLayoutManager(IntentServiceActivity.this,LinearLayoutManager.HORIZONTAL,false));//这里用线性显示 类似于listview
             recyclerView.setAdapter(adapter);
         }
     };
