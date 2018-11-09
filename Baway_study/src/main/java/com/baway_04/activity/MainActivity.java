@@ -1,16 +1,16 @@
 package com.baway_04.activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.baway_04.R;
-import com.baway_04.activity.BdMapbdActivity;
-import com.baway_04.activity.GaodeMapActivity;
 import com.baway_04.utils.Urls;
 import com.baway_04.adapter.XutilAdapter;
 
@@ -26,11 +26,19 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+
+import static android.Manifest.permission.LOCATION_HARDWARE;
+import static android.Manifest.permission.READ_PHONE_STATE;
+import static android.Manifest.permission.SEND_SMS;
+
+public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
     @ViewInject(R.id.listview)
     private ListView listView;
 
+    private static final String TAG = "MainActivity";
     private List<String> itemList = new ArrayList<>();
     private XutilAdapter adapter;
     @Override
@@ -39,11 +47,25 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         x.view().inject(this);
+        methodRequiresTwoPermission();
 
 
 
-        initView();
 //        initXutilsQuest();
+    }
+    @AfterPermissionGranted(1010)
+    private void methodRequiresTwoPermission() {
+        String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION, LOCATION_HARDWARE,READ_PHONE_STATE};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            // Already have permission, do the thing
+            // ...
+            initView();
+            LogUtil.d("Already have permission, do the thing");
+        } else {
+            // Do not have permissions, request them now
+            LogUtil.d("Do not have permissions, request them now");
+            EasyPermissions.requestPermissions(this, "camera_and_send_sms", 1010, perms);
+        }
     }
 
     public void initView(){
@@ -103,5 +125,30 @@ public class MainActivity extends AppCompatActivity {
                 LogUtil.e("onFinished");
             }
         });
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    private boolean isFrist = true;
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> list) {
+        // Some permissions have been granted
+        // ...
+        if (isFrist){
+            initView();
+            isFrist = false;
+        }
+        LogUtil.d("Some permissions have been granted=" + requestCode);
+    }
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> list) {
+        // Some permissions have been denied
+        // ...
+        LogUtil.d("Some permissions have been denied=" + requestCode);
     }
 }

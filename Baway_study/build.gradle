@@ -18,14 +18,14 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('/Users/chentaishan/Documents/AS_work/BaWay/Baway_04/Baway.keystore')
+            storeFile file('/Users/chentaishan/Documents/AS_work/BaWay/Baway_study/Baway.keystore')
 //签名文件路径
             storePassword "123456"
             keyPassword "123456"  //签名密码
         }
         debug {
             keyPassword '123456'
-            storeFile file('/Users/chentaishan/Documents/AS_work/BaWay/Baway_04/Baway.keystore')
+            storeFile file('/Users/chentaishan/Documents/AS_work/BaWay/Baway_study/Baway.keystore')
             storePassword '123456'
             keyAlias 'androiddebugkey'
         }
@@ -57,6 +57,8 @@ dependencies {
 
     implementation 'pub.devrel:easypermissions:2.0.0'
 
+
     implementation 'com.amap.api:map2d:latest.integration'
     implementation 'com.amap.api:location:latest.integration'
+
 }

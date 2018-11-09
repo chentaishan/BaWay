@@ -40,6 +40,13 @@ public class MyIntentService extends IntentService {
 //        String value  = intent.getExtras().getString("key");
 
         try {
+            Thread.sleep(5*1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
             String result = getNetData();
 
             JSONObject jsonObject = new JSONObject(result);

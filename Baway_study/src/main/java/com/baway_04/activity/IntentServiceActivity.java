@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 
 public class IntentServiceActivity extends AppCompatActivity implements IUpdateListener {
     @BindView(R.id.recyle_view)
+
     RecyclerView recyclerView;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,22 +41,43 @@ public class IntentServiceActivity extends AppCompatActivity implements IUpdateL
     @Override
     public void updateUI(List<String> foodList) {
 
-        Message msg = handler.obtainMessage();
-        msg.obj = foodList;
-        handler.sendMessage(msg);
+        if (handler!=null){
+
+            Message msg = handler.obtainMessage();
+            msg.obj = foodList;
+            handler.sendMessage(msg);
+        }
 
     }
 
     @SuppressLint("HandlerLeak")
-     Handler handler = new Handler(){
+      Handler handler = new Handler(){
         public void handleMessage(Message msg ){
             List<String> foodList  = (List<String>) msg.obj;
+//
+//            RecylerAdapter adapter = new RecylerAdapter(IntentServiceActivity.this,foodList);
+//            recyclerView.setLayoutManager(new LinearLayoutManager(IntentServiceActivity.this));//这里用线性显示 类似于listview
+////            recyclerView.setLayoutManager(new LinearLayoutManager(IntentServiceActivity.this,LinearLayoutManager.HORIZONTAL,false));//这里用线性显示 类似于listview
+//            recyclerView.setAdapter(adapter);
 
-            RecylerAdapter adapter = new RecylerAdapter(IntentServiceActivity.this,foodList);
-            recyclerView.setLayoutManager(new LinearLayoutManager(IntentServiceActivity.this));//这里用线性显示 类似于listview
-//            recyclerView.setLayoutManager(new LinearLayoutManager(IntentServiceActivity.this,LinearLayoutManager.HORIZONTAL,false));//这里用线性显示 类似于listview
-            recyclerView.setAdapter(adapter);
+            setData2View(foodList);
         }
     };
 
+    public   void setData2View(List<String> foodList){
+        RecylerAdapter adapter = new RecylerAdapter(IntentServiceActivity.this,foodList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(IntentServiceActivity.this));//这里用线性显示 类似于listview
+//            recyclerView.setLayoutManager(new LinearLayoutManager(IntentServiceActivity.this,LinearLayoutManager.HORIZONTAL,false));//这里用线性显示 类似于listview
+        recyclerView.setAdapter(adapter);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        handler = null;
+
+
+    }
 }
