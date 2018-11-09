@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
+import com.squareup.leakcanary.LeakCanary;
 
 import org.xutils.x;
 
@@ -22,5 +23,12 @@ public class MyApplication extends Application {
         SDKInitializer.setCoordType(CoordType.BD09LL);
 
 //        setApiKey(String apiKey);
+
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this);
     }
 }
