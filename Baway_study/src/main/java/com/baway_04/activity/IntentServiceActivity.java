@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -78,6 +79,7 @@ public class IntentServiceActivity extends AppCompatActivity implements IUpdateL
         recyclerView.setLayoutManager(new LinearLayoutManager(IntentServiceActivity.this));//这里用线性显示 类似于listview
 //            recyclerView.setLayoutManager(new LinearLayoutManager(IntentServiceActivity.this,LinearLayoutManager.HORIZONTAL,false));//这里用线性显示 类似于listview
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
     }
 
 

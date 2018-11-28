@@ -3,6 +3,7 @@ package com.baway_04.adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +29,16 @@ public class RecylerAdapter extends RecyclerView.Adapter {
     private List<String> foodList = new ArrayList<>();
     private List<Boolean> foodListStatus = new ArrayList<>();
 
+    private static final String TAG = "RecylerAdapter";
     public RecylerAdapter(Context context,List<String> foodList){
         this.context = context;
         this.foodList = foodList;
-        for (String s :foodList){
+
+
+        for (int x=0;x<foodList.size();x++){
             foodListStatus.add(false);
         }
+
     }
     @NonNull
     @Override
@@ -51,12 +56,25 @@ public class RecylerAdapter extends RecyclerView.Adapter {
         }else{
             recyViewHolder.checkBox.setChecked(false);
         }
-        recyViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        Log.d(TAG, "onBindViewHolder: status="+foodListStatus.get(i)+"--index="+i);
+        recyViewHolder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    foodListStatus.set(i,isChecked);
+            public void onClick(View v) {
+                if (foodListStatus.get(i)){
+                    foodListStatus.set(i,false);
+                }else{
+                    foodListStatus.set(i,true);
+                }
+                Log.d(TAG, "onCheckedChanged: --index="+i);
             }
         });
+//        recyViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                    foodListStatus.set(i,isChecked);
+//                Log.d(TAG, "onCheckedChanged: status="+isChecked+"--index="+i);
+//            }
+//        });
         recyViewHolder.text.setText(foodList.get(i));
     }
 
