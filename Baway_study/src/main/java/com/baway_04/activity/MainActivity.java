@@ -29,9 +29,7 @@ import java.util.List;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-import static android.Manifest.permission.LOCATION_HARDWARE;
-import static android.Manifest.permission.READ_PHONE_STATE;
-import static android.Manifest.permission.SEND_SMS;
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 
 public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     }
     @AfterPermissionGranted(1010)
     private void methodRequiresTwoPermission() {
-        String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION, LOCATION_HARDWARE,READ_PHONE_STATE};
+        String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION};
         if (EasyPermissions.hasPermissions(this, perms)) {
             // Already have permission, do the thing
             // ...

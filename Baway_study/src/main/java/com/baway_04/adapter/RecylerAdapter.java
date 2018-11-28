@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,10 +26,14 @@ public class RecylerAdapter extends RecyclerView.Adapter {
     private Context context;
 
     private List<String> foodList = new ArrayList<>();
+    private List<Boolean> foodListStatus = new ArrayList<>();
 
     public RecylerAdapter(Context context,List<String> foodList){
         this.context = context;
         this.foodList = foodList;
+        for (String s :foodList){
+            foodListStatus.add(false);
+        }
     }
     @NonNull
     @Override
@@ -36,10 +42,21 @@ public class RecylerAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
         RecyViewHolder recyViewHolder = (RecyViewHolder) viewHolder;
         x.image().bind(recyViewHolder.img,foodList.get(i));
 
+        if (foodListStatus.get(i)){
+            recyViewHolder.checkBox.setChecked(true);
+        }else{
+            recyViewHolder.checkBox.setChecked(false);
+        }
+        recyViewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    foodListStatus.set(i,isChecked);
+            }
+        });
         recyViewHolder.text.setText(foodList.get(i));
     }
 
@@ -54,6 +71,8 @@ public class RecylerAdapter extends RecyclerView.Adapter {
         ImageView img;
         @BindView(R.id.item_text)
         TextView text;
+        @BindView(R.id.checkBox)
+        CheckBox checkBox;
 
         public RecyViewHolder(View view){
             super(view);

@@ -29,6 +29,38 @@ public class MyApplication extends Application {
             // You should not init your app in this process.
             return;
         }
+
         LeakCanary.install(this);
+    }
+
+    public int compareVerNum(double a,double b){
+        int blength = (b+"").length();
+        int alength = (a+"").length();
+        int size = blength-alength;
+        if (size>0){
+            String as=null;
+            int [] time = new int[size];
+            for (int t : time){
+                as = a+"0";
+            }
+            a = Double.valueOf(as);
+        }else if (size<0){
+            String bs=null;
+            int [] time = new int[size];
+            for (int t : time){
+                bs = a+"0";
+            }
+            b= Double.valueOf(bs);
+        }
+
+        if (a>b) {
+            return -1;
+        }else if(a==b){
+            return 0;
+        }else if(a<b){
+            return -1;
+        }
+
+        return -3;
     }
 }

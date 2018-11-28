@@ -3,6 +3,7 @@ package com.baway_04.activity;
 import android.app.IntentService;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.baway_04.inter.IUpdateListener;
 import com.baway_04.utils.Urls;
@@ -19,6 +20,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ntentservice 耗时操作  相当于子线程 处理 耗时操作
+ */
 public class MyIntentService extends IntentService {
     private static IUpdateListener iUpdate;
     private static final String TAG = "MyIntentService";
@@ -36,14 +40,14 @@ public class MyIntentService extends IntentService {
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
 
-
+    //耗时操作 的处理逻辑
 //        String value  = intent.getExtras().getString("key");
-
-        try {
-            Thread.sleep(5*1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//
+//        try {
+//            Thread.sleep(5*1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
 
         try {
@@ -58,6 +62,7 @@ public class MyIntentService extends IntentService {
                  foodList.add(json.optString("pic"));
              }
 
+            Log.d(TAG, "onHandleIntent: iupdate="+iUpdate);
              iUpdate.updateUI(  foodList);
 
         } catch (IOException e) {

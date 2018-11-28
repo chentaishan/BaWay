@@ -20,5 +20,9 @@ public class Urls {
         className = new HashMap<>();
         className.put("IntentServiceActivity","测试intentService");
         classList.add(className);
+
+        className = new HashMap<>();
+        className.put("OkhttpDemoActivity","测试okhttp");
+        classList.add(className);
     }
 }
