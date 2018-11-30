@@ -13,6 +13,8 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.baway_04.R;
 import com.baway_04.adapter.RecylerAdapter;
@@ -27,8 +29,13 @@ public class IntentServiceActivity extends AppCompatActivity implements IUpdateL
     @BindView(R.id.recyle_view)
 
     RecyclerView recyclerView;
-    private String TAG="DEMO TEST";
+    @BindView(R.id.selectAll)
+    Button seleAll;
 
+
+    boolean isAllSelected ;
+    private String TAG="DEMO TEST";
+    RecylerAdapter adapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +50,23 @@ public class IntentServiceActivity extends AppCompatActivity implements IUpdateL
 
         startService(intent);
 
+
+        seleAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isAllSelected){
+
+                    adapter.setSelectAll(isAllSelected);
+                    isAllSelected =false;
+                    seleAll.setText("全选");
+                }else{
+
+                    adapter.setSelectAll(isAllSelected);
+                    isAllSelected = true;
+                    seleAll.setText("取消全选");
+                }
+            }
+        });
 
     }
 
@@ -75,11 +99,12 @@ public class IntentServiceActivity extends AppCompatActivity implements IUpdateL
     };
 
     public void setData2View(List<String> foodList){
-        RecylerAdapter adapter = new RecylerAdapter(IntentServiceActivity.this,foodList);
+         adapter = new RecylerAdapter(IntentServiceActivity.this,foodList);
         recyclerView.setLayoutManager(new LinearLayoutManager(IntentServiceActivity.this));//这里用线性显示 类似于listview
 //            recyclerView.setLayoutManager(new LinearLayoutManager(IntentServiceActivity.this,LinearLayoutManager.HORIZONTAL,false));//这里用线性显示 类似于listview
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+
     }
 
 

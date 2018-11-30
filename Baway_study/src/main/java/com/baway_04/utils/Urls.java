@@ -24,5 +24,10 @@ public class Urls {
         className = new HashMap<>();
         className.put("OkhttpDemoActivity","测试okhttp");
         classList.add(className);
+
+
+        className = new HashMap<>();
+        className.put("ExpandActivity","扩展的双级list");
+        classList.add(className);
     }
 }

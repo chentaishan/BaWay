@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     }
     @AfterPermissionGranted(1010)
     private void methodRequiresTwoPermission() {
-        String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION};
+        String[] perms = {Manifest.permission.ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_NETWORK_STATE};
         if (EasyPermissions.hasPermissions(this, perms)) {
             // Already have permission, do the thing
             // ...
