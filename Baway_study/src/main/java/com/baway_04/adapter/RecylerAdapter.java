@@ -97,6 +97,12 @@ public class RecylerAdapter extends RecyclerView.Adapter {
         });
 //        x.image().bind();
 
+
+        if (i%2==0){ // 偶数
+
+        }else{   // 奇数
+
+        }
         if (foodListStatus.get(i)){
             recyViewHolder.checkBox.setChecked(true);
         }else{

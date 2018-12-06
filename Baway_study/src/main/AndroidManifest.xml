@@ -57,6 +57,7 @@
         <activity android:name=".activity.IntentServiceActivity" />
         <activity android:name=".activity.OkhttpDemoActivity" />
         <activity android:name=".activity.ExpandActivity" />
+        <activity android:name=".activity.MVVMActivity" />
 
         <service
             android:name="com.baidu.location.f"

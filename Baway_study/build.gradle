@@ -4,6 +4,9 @@ android {
     compileSdkVersion 28
 
 
+    dataBinding{
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.baway_04"

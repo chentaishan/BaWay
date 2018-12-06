@@ -29,5 +29,9 @@ public class Urls {
         className = new HashMap<>();
         className.put("ExpandActivity","扩展的双级list");
         classList.add(className);
+
+        className = new HashMap<>();
+        className.put("MVVMActivity","MVVM demo");
+        classList.add(className);
     }
 }
